@@ -1,0 +1,7 @@
+{
+  "name": "DISASTER-MANAGEMENT",
+  "description": "Real-time disaster resource coordination platform connecting affected people, volunteers, and NGOs.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}

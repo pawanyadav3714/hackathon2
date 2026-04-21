@@ -1,0 +1,66 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile information.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "firstName": { "type": "string" },
+        "lastName": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "role": { "type": "string", "enum": ["user", "volunteer", "coordinator"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "firstName", "lastName", "email", "role"]
+    },
+    "Need": {
+      "title": "Need",
+      "description": "A reported need from an affected person.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "type": { "type": "string", "enum": ["health", "education", "food", "shelter", "other"] },
+        "description": { "type": "string" },
+        "location": {
+          "type": "object",
+          "properties": {
+            "lat": { "type": "number" },
+            "lng": { "type": "number" }
+          }
+        },
+        "status": { "type": "string", "enum": ["pending", "in-progress", "resolved"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "type", "description", "location", "status", "createdAt"]
+    },
+    "Story": {
+      "title": "Story",
+      "description": "Success stories or case studies.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "content", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles."
+    },
+    "/needs/{needId}": {
+      "schema": "Need",
+      "description": "Reported needs."
+    },
+    "/stories/{storyId}": {
+      "schema": "Story",
+      "description": "Success stories."
+    }
+  }
+}
